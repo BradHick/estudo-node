@@ -15,7 +15,7 @@ app.get('/produtos/form',function(req,res){
     res.render('produtos/form');
 });
 
-app.post('/produtos/salva',function(req,res){
+app.post('/produtos',function(req,res){
 
     var produto = req.body;
 
