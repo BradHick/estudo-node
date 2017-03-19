@@ -17,14 +17,6 @@ module.exports = function(app) {
     connection.end();
 };
 
-app.get('/produtos/json',function(req,res){
-    var connection = app.infra.connectionFactory();
-    var produtosDAO = new app.infra.ProdutosDAO(connection);
-    produtosDAO.lista(function(erros,resultados){
-        res.json(resultados);
-    });
-    connection.end();
-});
 
 app.get('/produtos',listaProdutos);
 
@@ -39,6 +31,7 @@ app.post('/produtos',function(req,res){
     var connection = app.infra.connectionFactory();
     var produtosDAO = new app.infra.ProdutosDAO(connection);
     produtosDAO.salva(produto,function(erros,resultados){
+        console.log(erros);
         res.redirect('/produtos');
     });
 });
