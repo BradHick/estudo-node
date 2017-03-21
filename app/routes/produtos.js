@@ -21,17 +21,25 @@ module.exports = function(app) {
 app.get('/produtos',listaProdutos);
 
 app.get('/produtos/form',function(req,res){
-    res.render('produtos/form');
+    res.render('produtos/form',
+              {errosValidacao:{}, produto:{}});
 });
 
 app.post('/produtos',function(req,res){
 
     var produto = req.body;
+    req.assert('titulo', 'Título é obrigatório').notEmpty();
+    req.assert('preco', 'Formato inválido').isFloat();
+
+    var errors = req.validationErrors();
+    if (errors) {
+      res.render('produtos/form', {errosValidacao:errors,produto:produto});
+      return;
+    }
 
     var connection = app.infra.connectionFactory();
     var produtosDAO = new app.infra.ProdutosDAO(connection);
     produtosDAO.salva(produto,function(erros,resultados){
-        console.log(erros);
         res.redirect('/produtos');
     });
 });
