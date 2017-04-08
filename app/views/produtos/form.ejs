@@ -1,37 +1,29 @@
-<!DOCTYPE html>
-<html lang="pt-br">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>Document</title>
-</head>
-<body>
+<html>
+    <body>
+        <div class='erros'>
+             <%if(errosValidacao){%>
+                <ul>
+                    <%for(var i=0;i<errosValidacao.length;i++){%>
+                        <li><%=errosValidacao[i].param%> - <%=errosValidacao[i].msg%></li>
+                    <%}%>
+                </ul>
+             <%}%>
+        </div>
+        <form action="/produtos" method="post">
+            <div>
+                <label for="titulo">Titulo</label>
+                <input type="text" id="titulo" name="titulo" value="<%=produto.titulo%>" placeholder="coloque o titulo"/>
+            </div>
+            <div>
+                <label for="preco">Preço</label>
+                <input type="text" id="preco" name="preco" value="<%=produto.preco%>" placeholder="150.25"/>
+            </div>
+            <div>
+                <label for="descricao">Descrição</label>
+                <textarea cols="20" rows="10"  id="descricao" name="descricao" placeholder="fale sobre o livro"><%=produto.descricao%></textarea>
+            </div>
 
-  <div class='erros'>
-     <%if(errosValidacao){%>
-        <ul>
-            <%for(var i=0;i<errosValidacao.length;i++){%>
-                <li><%=errosValidacao[i].param%> - <%=errosValidacao[i].msg%></li>
-            <%}%>
-        </ul>
-     <%}%>
-  </div>
-
-  <form class="" action="/produtos" method="post">
-    <div class="">
-      <label for="titulo">Título</label>
-      <input type="text" id="titulo" name="titulo" placeholder="coloque o título" value="<%=produto.titulo%>">
-    </div>
-    <div class="">
-      <label for="preco">Preço</label>
-      <input type="text" id="preco" name="preco" placeholder="coloque o preço" value="<%=produto.preco%>">
-    </div>
-    <div class="">
-      <label for="descricao">Descrição</label>
-      <textarea cols="20" rows="10" id="descricao" name="descricao" placeholder="coloque a descrição"><%=produto.descricao%></textarea>
-    </div>
-    <input type="submit" name="" value="gravar"/>
-  </form>
-</body>
+            <input type="submit" value="gravar"/>
+        </form>
+    </body>
 </html>

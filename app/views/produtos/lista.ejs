@@ -1,29 +1,22 @@
-<!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="utf-8">
-    <title></title>
-  </head>
-  <body>
-      <table>
-        <tr>
-          <td>Id</td>
-          <td>Título</td>
-          <td>Descrição</td>
-          <td>Preço</td>
-        </tr>
-        <tr>
-          <%for(var i=0; i<lista.length;i++) {%>
+    <body>
+        <table border="1px">
             <tr>
-              <td><%=lista[i].id%></td>
-              <td><%=lista[i].titulo%></td>
-              <td><%=lista[i].descricao%></td>
-              <td><%=lista[i].preco%></td>
+                <td>id</td>
+                <td>nome</td>
+                <td>descricao</td>
+                <td>preco</td>
             </tr>
-
-          <%}%>
-        </tr>
-      </table>
-
-  </body>
+            <tr>
+                <% for(var i=0; i<lista.length; i++) {%>
+                    <tr>
+                        <td><%= lista[i].id %></td>
+                        <td><%= lista[i].titulo %></td>
+                        <td><%= lista[i].preco %></td>
+                        <td><%= lista[i].descricao%></td>
+                    </tr>
+                <% } %>
+            </tr>
+        </table>
+    </body>
 </html>
