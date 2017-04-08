@@ -6,10 +6,10 @@ module.exports = function(app) {
     produtosDAO.lista(function(erros,resultados){
       res.format({
           html: function(){
-              res.render('produtos/lista',{lista:resultados});
+              res.status(400).render('produtos/lista',{lista:resultados});
           },
           json: function(){
-              res.json(resultados)
+              res.status(400).json(resultados);
           }
       });
 
@@ -33,8 +33,14 @@ app.post('/produtos',function(req,res){
 
     var errors = req.validationErrors();
     if (errors) {
-      res.render('produtos/form', {errosValidacao:errors,produto:produto});
-      return;
+      res.format({
+          html: function(){
+              res.render('produtos/form', {errosValidacao:errors,produto:produto});
+          },
+          json: function(){
+              res.json(errors);
+          }
+      });
     }
 
     var connection = app.infra.connectionFactory();
